@@ -142,7 +142,7 @@ public class UpdateNews extends HttpServlet {
 					//将该条新闻对应HTML页面缓存至服务器
 					new HTTPDownload(news.getLink(),savePath,"NewsCache");
 					//更新数据库
-				//	ud.updateNews(news);
+				///ud.updateNews(news);
 					//将缓存页面内新闻部分重新制成HTML页面，保存至服务器WebRoot\\NewsDetails\\文件夹下
 					new HTMLOVRUtil("\\NewsCache", request.getSession().getServletContext().getRealPath("")+"\\NewsDetails\\", ud.getNewsIDByTitle(news.getTitle())+".html");
 					//补充更新StorageLoc
