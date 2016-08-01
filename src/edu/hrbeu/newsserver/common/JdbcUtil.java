@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class JdbcUtil {
 	static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	static final String URL = "jdbc:sqlserver://183.61.166.98:1433;databaseName=sq_liangzixin";
+	static final String URL = "jdbc:sqlserver://192.168.1.6:1433;databaseName=sq_liangzixin";
 	static final String USER ="sq_liangzixin";
 	static final String PWD ="ltp048";
 	public static Connection getConnection() {
