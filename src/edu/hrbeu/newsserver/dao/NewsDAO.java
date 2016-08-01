@@ -3,26 +3,28 @@ package edu.hrbeu.newsserver.dao;
 import java.sql.*;
 import java.util.ArrayList;
 
+import edu.hrbeu.newsserver.common.GateTime;
 import edu.hrbeu.newsserver.common.JdbcUtil;
 import edu.hrbeu.newsserver.model.News;
 
 public class NewsDAO {
 	/**
 	 * @param news - A new News Entity that shall be inserted into database*/
+	GateTime gateTime=new GateTime();
 	public void updateNews(News news){
 		Connection con = null;
 		PreparedStatement stm = null;
 		
 		try {
 			con = JdbcUtil.getConnection();
-			stm = con.prepareStatement("INSERT INTO tb_news (Title, Category, Abstract, DateTime, StorageLoc, Link, Provider) VALUES (?, ?, ?, ?, ?, ?, ?)");
-			stm.setString(1, news.getTitle());
-			stm.setString(2, news.getCategory());
-			stm.setString(3, news.getAbstract());
-			stm.setString(4, news.getDatetime());
-			stm.setString(5, news.getStorageLoc());
-			stm.setString(6, news.getLink());
-			stm.setString(7, news.getProvider());
+		stm = con.prepareStatement("INSERT INTO tb_productinfo (name, CategoryId, CreateTime) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			stm.setString(1, news.getName());
+			stm.setInt(2, news.getCategoryId());
+			//stm.setString(3, news.getAbstract());
+		//	stm.setString(4, gateTime.formatTime(news.getCreateTime()));
+		//	stm.setString(5, news.getStorageLoc());
+		//	stm.setString(6, news.getLink());
+		//	stm.setString(7, news.getProvider());
 			
 			stm.executeUpdate();
 			
@@ -42,7 +44,7 @@ public class NewsDAO {
 		int result = 0;
 		try {
 			con = JdbcUtil.getConnection();
-			stm = con.prepareStatement("SELECT NewsID FROM tb_news WHERE Title=?");
+			stm = con.prepareStatement("SELECT id FROM tb_productinfo WHERE name=?");
 			stm.setString(1, title);
 			rs = stm.executeQuery();
 			while(rs.next()){
@@ -64,7 +66,7 @@ public class NewsDAO {
 		
 		try {
 			con = JdbcUtil.getConnection();
-			stm = con.prepareStatement("UPDATE tb_news SET StorageLoc = ? WHERE NewsID= ?");
+			stm = con.prepareStatement("UPDATE tb_productinfo SET StorageLoc = ? WHERE NewsID= ?");
 			stm.setString(1, Loc);
 			stm.setInt(2, ID);
 			
@@ -80,28 +82,28 @@ public class NewsDAO {
 	/**
 	 * @param Category - Target category of news.
 	 * @return A News list of a certain category.*/
-	public ArrayList<News> getNewsByCategory(String Category){
+	public ArrayList<News> getNewsByCategory(int CategoryId){
 		Connection con = null;
 		PreparedStatement stm = null;
 		ResultSet rs = null;
 		ArrayList<News> result = new ArrayList<News>();
 		try {
 			con = JdbcUtil.getConnection();
-			stm = con.prepareStatement("SELECT NewsID, Title, Category, Abstract, Provider, DateTime, StorageLoc, Link FROM tb_news WHERE Category = ?");
-			stm.setString(1, Category);
+			stm = con.prepareStatement("SELECT id, name, categoryId, createTime FROM tb_productinfo WHERE CategoryId = ?");
+			stm.setInt(1, CategoryId);
 			
 			rs = stm.executeQuery();
 			
 			while(rs.next()){
 				News news = new News();
-				news.setNewsID(rs.getInt("NewsID"));
-				news.setTitle(rs.getString("Title"));
-				news.setCategory(rs.getString("Category"));
-				news.setAbstract(rs.getString("Abstract"));
-				news.setProvider(rs.getString("Provider"));
-				news.setDatetime(rs.getString("DateTime"));
-				news.setStorageLoc(rs.getString("StorageLoc"));
-				news.setLink(rs.getString("Link"));
+				news.setId(rs.getInt("id"));
+				news.setName(rs.getString("name"));
+				news.setCategoryId(rs.getInt("CategoryId"));
+				//news.setAbstract(rs.getString("Abstract"));
+			//	news.setProvider(rs.getString("Provider"));
+				news.setCreateTime(rs.getDate("createTime"));
+		//		news.setStorageLoc(rs.getString("StorageLoc"));
+			//	news.setLink(rs.getString("Link"));
 				
 				result.add(news);
 			}

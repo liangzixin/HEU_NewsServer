@@ -31,18 +31,19 @@ public class UserLogin extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 		
 		ResponseJson json = new ResponseJson ();
 		Gson gson = new Gson();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
+		//username = new String(username.getBytes("GBK"),"UTF-8");
 		UserDAO ud = new UserDAO();
 		int ver_rs = ud.verifyUserReturnID(username ,password);
 		
-		if(ver_rs!=-1){
+ 		if(ver_rs!=-1){
 			json.status = 200;
 			json.userid = ver_rs;
 			json.msg = "登录成功";

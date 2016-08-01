@@ -41,7 +41,7 @@ public class XmlUtil {
 		return element;
 	}
 
-	public void generateXML(ArrayList<News> list, String Category, String SavePath){
+	public void generateXML(ArrayList<News> list, int CategoryId, String SavePath){
 		RandomAccessFile XML = null;
 	    //若无存储位置则直接返回
 		if(StringUtils.isEmpty(SavePath) || StringUtils.isBlank(SavePath)){
@@ -54,11 +54,11 @@ public class XmlUtil {
 		 }
 		//按类别生成XML文件
 		String Cate;
-		if(Category.equals("头条新闻"))
+		if(CategoryId==1)
 			Cate = "NewsTop";
-		else if(Category.equals("国内新闻"))
+		else if(CategoryId==2)
 			Cate = "NationalNews";
-		else if(Category.equals("国际新闻"))
+		else if(CategoryId==3)
 			Cate = "InternationalNews";
 		else 
 			Cate = "Society";
@@ -76,15 +76,15 @@ public class XmlUtil {
 		for(News news:list){
 			//写入每个新闻结点信息
 			try {
-				XML.write(("<news id=\""+news.getNewsID()+"\">"+"\r\n").toString().getBytes("utf-8"));
-				XML.write(("<id>"+news.getNewsID()+"</id>"+"\r\n").toString().getBytes("utf-8"));
-				XML.write(("<title>"+news.getTitle()+"</title>"+"\r\n").getBytes("utf-8"));
-				XML.write(("<category>"+news.getCategory()+"</category>"+"\r\n").getBytes("utf-8"));
+				XML.write(("<news id=\""+news.getId()+"\">"+"\r\n").toString().getBytes("utf-8"));
+				XML.write(("<id>"+news.getId()+"</id>"+"\r\n").toString().getBytes("utf-8"));
+				XML.write(("<name>"+news.getName()+"</title>"+"\r\n").getBytes("utf-8"));
+				XML.write(("<categoryId>"+news.getCategoryId()+"</categoryId>"+"\r\n").getBytes("utf-8"));
 				XML.write(("<abstract>"+news.getAbstract()+"</abstract>"+"\r\n").getBytes("utf-8"));
 				XML.write(("<provider>"+news.getProvider()+"</provider>"+"\r\n").getBytes("utf-8"));
-				XML.write(("<pubtime>"+news.getDatetime()+"</pubtime>"+"\r\n").getBytes("utf-8"));
-				XML.write(("<link>"+news.getStorageLoc()+"</link>"+"\r\n").getBytes("utf-8"));
-				XML.write(("<origlink>"+news.getLink()+"</origlink>"+"\r\n").getBytes("utf-8"));
+				XML.write(("<pubtime>"+news.getCreateTime()+"</pubtime>"+"\r\n").getBytes("utf-8"));
+			//	XML.write(("<link>"+news.getStorageLoc()+"</link>"+"\r\n").getBytes("utf-8"));
+			//	XML.write(("<origlink>"+news.getLink()+"</origlink>"+"\r\n").getBytes("utf-8"));
 				XML.write("</news> \r\n".getBytes("utf-8"));
 			}catch (IOException e) {
 	            e.printStackTrace();

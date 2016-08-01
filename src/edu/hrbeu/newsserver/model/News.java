@@ -1,22 +1,20 @@
 package edu.hrbeu.newsserver.model;
 
+import java.util.Date;
+
 public class News {
 	
-	private int NewsID;
-	private String Title;
-	private String Category;
+	private int id;
+	private String name;
+	private int categoryId;
 	private String Abstract;
 	private String Provider;
-	private String Datetime;
-	private String StorageLoc;
-	private String Link;
+	private Date createTime;
+	private String description;
+	//private String StorageLoc;
+	//private String Link;
 	
-	public String getTitle() {
-		return Title;
-	}
-	public void setTitle(String title) {
-		Title = title;
-	}
+	
 	public String getAbstract() {
 		return Abstract;
 	}
@@ -29,35 +27,37 @@ public class News {
 	public void setProvider(String provider) {
 		Provider = provider;
 	}
-	public String getDatetime() {
-		return Datetime;
+
+	public int getId() {
+		return id;
 	}
-	public void setDatetime(String datetime) {
-		Datetime = datetime;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getNewsID() {
-		return NewsID;
+	public String getName() {
+		return name;
 	}
-	public void setNewsID(int newsID) {
-		NewsID = newsID;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getCategory() {
-		return Category;
+	
+	public Date getCreateTime() {
+		return createTime;
 	}
-	public void setCategory(String category) {
-		Category = category;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
-	public String getStorageLoc() {
-		return StorageLoc;
+	public String getDescription() {
+		return description;
 	}
-	public void setStorageLoc(String storageLoc) {
-		StorageLoc = storageLoc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getLink() {
-		return Link;
+	public int getCategoryId() {
+		return categoryId;
 	}
-	public void setLink(String link) {
-		Link = link;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 }

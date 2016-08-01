@@ -104,57 +104,57 @@ public class UpdateNews extends HttpServlet {
 					Node node = element.selectSingleNode(Constant.RSS_DOM_CHILRDEN_ROOT_TITLE);				
 					Node link = element.selectSingleNode(Constant.RSS_DOM_CHILRDEN_ROOT_LINK);
 									
-					news.setTitle(node.getText());
+					news.setName(node.getText());
 				//	news.setAbstract(abs_sub.substring(0,30)+"...");
 					news.setAbstract(abs_sub.substring(0,2)+"...");
-					news.setDatetime(time.getText());				
-					news.setLink(link.getText());
+				//	news.setCreateTime(time.getText());				
+			//		news.setLink(link.getText());
 					if(url.toString().indexOf("top")!=-1){
-						news.setCategory("头条新闻");
+						news.setCategoryId(1);
 						news.setProvider("网易头条");
 						}
 					else if(url.toString().indexOf("gn")!=-1){
-						news.setCategory("国内新闻");
+						news.setCategoryId(2);
 						news.setProvider("网易国内");
 						}
 					else if(url.toString().indexOf("gj")!=-1){
-						news.setCategory("国际新闻");
+						news.setCategoryId(3);
 						news.setProvider("网易国际");
 						}
 					else if(url.toString().indexOf("sh")!=-1){
-						news.setCategory("社会新闻");
+						news.setCategoryId(4);
 						news.setProvider("网易社会");
 						}
 					else if(url.toString().indexOf("war")!=-1){
-						news.setCategory("军事新闻");
+						news.setCategoryId(5);
 						news.setProvider("网易军事");
 						}
 					else if(url.toString().indexOf("hot")!=-1){
-						news.setCategory("深度新闻");
+						news.setCategoryId(6);
 						news.setProvider("网易深度");
 						}
 					else if(url.toString().indexOf("dis")!=-1){
-						news.setCategory("探索新闻");
+						news.setCategoryId(7);
 						news.setProvider("网易探索");
 						}
 					
 					
 					//将该条新闻对应HTML页面缓存至服务器
-					new HTTPDownload(news.getLink(),savePath,"NewsCache");
+			//		new HTTPDownload(news.getLink(),savePath,"NewsCache");
 					//更新数据库
 				///ud.updateNews(news);
 					//将缓存页面内新闻部分重新制成HTML页面，保存至服务器WebRoot\\NewsDetails\\文件夹下
-					new HTMLOVRUtil("\\NewsCache", request.getSession().getServletContext().getRealPath("")+"\\NewsDetails\\", ud.getNewsIDByTitle(news.getTitle())+".html");
+					new HTMLOVRUtil("\\NewsCache", request.getSession().getServletContext().getRealPath("")+"\\NewsDetails\\", ud.getNewsIDByTitle(news.getName())+".html");
 					//补充更新StorageLoc
-					ud.updateStorageLocByID("http://192.168.16.101:8086/HEU_NewsServer/NewsDetails/"+ud.getNewsIDByTitle(news.getTitle())+".html", ud.getNewsIDByTitle(news.getTitle()));
+					ud.updateStorageLocByID("http://192.168.16.101:8086/HEU_NewsServer/NewsDetails/"+ud.getNewsIDByTitle(news.getName())+".html", ud.getNewsIDByTitle(news.getName()));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		//将数据库内新闻按类别以xml形式存储至服务器根目录
-		String[] cate = {"头条新闻","国内新闻","国际新闻","社会新闻"};
-		//String[] cate = {"1","2","3","4"};
+	//	String[] cate = {"头条新闻","国内新闻","国际新闻","社会新闻"};
+		int[] cate = {1,2,3,4};
 		for(int i = 0;i <= 3;i ++ ){
 			ArrayList<News> list = ud.getNewsByCategory(cate[i]);
 			xu.generateXML(list, cate[i], request.getSession().getServletContext().getRealPath("")+"\\");

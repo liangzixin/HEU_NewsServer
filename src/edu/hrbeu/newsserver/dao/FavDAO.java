@@ -64,23 +64,23 @@ public class FavDAO {
 		try{
 			con = JdbcUtil.getConnection();
 			
-			stm = con.prepareStatement("SELECT news.NewsID, news.Title, news.Abstract, news.DateTime, news.Provider, news.Category, news.StorageLoc, news.Link " +
-					"FROM favorite, news " +
-					"WHERE favorite.NewsID=news.NewsID AND favorite.UserID = ?");
+			stm = con.prepareStatement("SELECT news.id, news.name, news.createTime, news.CategoryId " +
+					"FROM favorite, tb_productinfo " +
+					"WHERE favorite.NewsID=news.id AND favorite.UserID = ?");
 			stm.setInt(1, userid);
 			
 			rs = stm.executeQuery();
 			
 			while(rs.next()){
 				News news = new News();
-				news.setNewsID(rs.getInt("NewsID"));
-				news.setTitle(rs.getString("Title"));
+				news.setId(rs.getInt("id"));
+				news.setName(rs.getString("name"));
 				news.setAbstract(rs.getString("Abstract"));
-				news.setDatetime(rs.getString("DateTime"));
-				news.setStorageLoc(rs.getString("StorageLoc"));
-				news.setLink(rs.getString("Link"));
-				news.setProvider(rs.getString("Provider"));
-				news.setCategory(rs.getString("Category"));
+				news.setCreateTime(rs.getDate("createTime"));
+			//	news.setStorageLoc(rs.getString("StorageLoc"));
+			//	news.setLink(rs.getString("Link"));
+			//	news.setProvider(rs.getString("Provider"));
+				news.setCategoryId(rs.getInt("CategoryId"));
 				list.add(news);
 			}
 		}catch (SQLException e) {
