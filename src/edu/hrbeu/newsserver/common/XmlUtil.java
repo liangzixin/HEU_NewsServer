@@ -36,7 +36,7 @@ public class XmlUtil {
 	}
 
 	public Element getFirstNodeTitle(String path, URL url) {
-		List list = getXmlInfo(path, url);
+		List<?> list = getXmlInfo(path, url);
 		Element element = (Element) list.get(0);
 		return element;
 	}
@@ -80,9 +80,9 @@ public class XmlUtil {
 				XML.write(("<id>"+news.getId()+"</id>"+"\r\n").toString().getBytes("utf-8"));
 				XML.write(("<name>"+news.getName()+"</title>"+"\r\n").getBytes("utf-8"));
 				XML.write(("<categoryId>"+news.getCategoryId()+"</categoryId>"+"\r\n").getBytes("utf-8"));
-				XML.write(("<abstract>"+news.getAbstract()+"</abstract>"+"\r\n").getBytes("utf-8"));
-				XML.write(("<provider>"+news.getProvider()+"</provider>"+"\r\n").getBytes("utf-8"));
-				XML.write(("<pubtime>"+news.getCreateTime()+"</pubtime>"+"\r\n").getBytes("utf-8"));
+			//	XML.write(("<abstract>"+news.getAbstract()+"</abstract>"+"\r\n").getBytes("utf-8"));
+			//	XML.write(("<provider>"+news.getProvider()+"</provider>"+"\r\n").getBytes("utf-8"));
+			//	XML.write(("<pubtime>"+news.getCreateTime()+"</pubtime>"+"\r\n").getBytes("utf-8"));
 			//	XML.write(("<link>"+news.getStorageLoc()+"</link>"+"\r\n").getBytes("utf-8"));
 			//	XML.write(("<origlink>"+news.getLink()+"</origlink>"+"\r\n").getBytes("utf-8"));
 				XML.write("</news> \r\n".getBytes("utf-8"));

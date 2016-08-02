@@ -48,7 +48,7 @@ public class NewsDAO {
 			stm.setString(1, title);
 			rs = stm.executeQuery();
 			while(rs.next()){
-				result = rs.getInt("NewsID");
+				result = rs.getInt("id");
 			}			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class NewsDAO {
 	public void updateStorageLocByID(String Loc, int ID){
 		Connection con = null;
 		PreparedStatement stm = null;
-		
+		/*
 		try {
 			con = JdbcUtil.getConnection();
 			stm = con.prepareStatement("UPDATE tb_productinfo SET StorageLoc = ? WHERE NewsID= ?");
@@ -77,6 +77,7 @@ public class NewsDAO {
 		} finally {
 			JdbcUtil.closeResource(null, stm, con);
 		}
+		*/
 	}
 	
 	/**
@@ -89,7 +90,7 @@ public class NewsDAO {
 		ArrayList<News> result = new ArrayList<News>();
 		try {
 			con = JdbcUtil.getConnection();
-			stm = con.prepareStatement("SELECT id, name, categoryId, createTime FROM tb_productinfo WHERE CategoryId = ?");
+			stm = con.prepareStatement("SELECT TOP 3  id, name, categoryId, createTime FROM tb_productinfo WHERE CategoryId = ? ORDER BY ID DESC");
 			stm.setInt(1, CategoryId);
 			
 			rs = stm.executeQuery();
@@ -101,7 +102,7 @@ public class NewsDAO {
 				news.setCategoryId(rs.getInt("CategoryId"));
 				//news.setAbstract(rs.getString("Abstract"));
 			//	news.setProvider(rs.getString("Provider"));
-				news.setCreateTime(rs.getDate("createTime"));
+			//	news.setCreateTime(rs.getDate("createTime"));
 		//		news.setStorageLoc(rs.getString("StorageLoc"));
 			//	news.setLink(rs.getString("Link"));
 				

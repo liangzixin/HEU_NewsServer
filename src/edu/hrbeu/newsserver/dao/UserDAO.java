@@ -62,13 +62,13 @@ public class UserDAO {
 		con = JdbcUtil.getConnection();
 				
 		try {
-			stm = con.prepareStatement("SELECT UserID FROM tb_user WHERE Username = ? AND Password = ?");
+			stm = con.prepareStatement("SELECT id FROM tb_user WHERE Username = ? AND Password = ?");
 			stm.setString(1, name);
 			stm.setString(2, password);
 			rs = stm.executeQuery();
 			
 			while(rs.next()){
-				rs_id = rs.getInt("UserID");
+				rs_id = rs.getInt("id");
 			}
 			
 		}catch (SQLException e) {

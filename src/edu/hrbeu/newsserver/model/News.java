@@ -7,14 +7,14 @@ public class News {
 	private int id;
 	private String name;
 	private int categoryId;
-	private String Abstract;
-	private String Provider;
-	private Date createTime;
-	private String description;
+	//private String Abstract;
+	//private String Provider;
+	//private Date createTime;
+	//private String description;
 	//private String StorageLoc;
 	//private String Link;
 	
-	
+	/*
 	public String getAbstract() {
 		return Abstract;
 	}
@@ -27,7 +27,7 @@ public class News {
 	public void setProvider(String provider) {
 		Provider = provider;
 	}
-
+*/
 	public int getId() {
 		return id;
 	}
@@ -40,7 +40,7 @@ public class News {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	/*
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -53,6 +53,7 @@ public class News {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	*/
 	public int getCategoryId() {
 		return categoryId;
 	}

@@ -75,8 +75,8 @@ public class FavDAO {
 				News news = new News();
 				news.setId(rs.getInt("id"));
 				news.setName(rs.getString("name"));
-				news.setAbstract(rs.getString("Abstract"));
-				news.setCreateTime(rs.getDate("createTime"));
+				//news.setAbstract(rs.getString("Abstract"));
+			//	news.setCreateTime(rs.getDate("createTime"));
 			//	news.setStorageLoc(rs.getString("StorageLoc"));
 			//	news.setLink(rs.getString("Link"));
 			//	news.setProvider(rs.getString("Provider"));

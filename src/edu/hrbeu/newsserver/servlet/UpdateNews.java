@@ -106,36 +106,36 @@ public class UpdateNews extends HttpServlet {
 									
 					news.setName(node.getText());
 				//	news.setAbstract(abs_sub.substring(0,30)+"...");
-					news.setAbstract(abs_sub.substring(0,2)+"...");
+				//	news.setAbstract(abs_sub.substring(0,2)+"...");
 				//	news.setCreateTime(time.getText());				
 			//		news.setLink(link.getText());
 					if(url.toString().indexOf("top")!=-1){
 						news.setCategoryId(1);
-						news.setProvider("网易头条");
+						//news.setProvider("网易头条");
 						}
 					else if(url.toString().indexOf("gn")!=-1){
 						news.setCategoryId(2);
-						news.setProvider("网易国内");
+					//	news.setProvider("网易国内");
 						}
 					else if(url.toString().indexOf("gj")!=-1){
 						news.setCategoryId(3);
-						news.setProvider("网易国际");
+					//	news.setProvider("网易国际");
 						}
 					else if(url.toString().indexOf("sh")!=-1){
 						news.setCategoryId(4);
-						news.setProvider("网易社会");
+					//	news.setProvider("网易社会");
 						}
 					else if(url.toString().indexOf("war")!=-1){
 						news.setCategoryId(5);
-						news.setProvider("网易军事");
+					//	news.setProvider("网易军事");
 						}
 					else if(url.toString().indexOf("hot")!=-1){
 						news.setCategoryId(6);
-						news.setProvider("网易深度");
+					//	news.setProvider("网易深度");
 						}
 					else if(url.toString().indexOf("dis")!=-1){
 						news.setCategoryId(7);
-						news.setProvider("网易探索");
+					//	news.setProvider("网易探索");
 						}
 					
 					
